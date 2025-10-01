@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<style>
+    a {
+        color: #fff !important;
+    }
+
+    .dropdown-item {
+        color: black !important;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-success border-bottom border-body">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Biblioteca - IFSULDEMINAS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Consultas
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/autores/">Autores</a></li>
+                            <li><a class="dropdown-item" href="/cidade/">Cidade</a></li>
+                            <li><a class="dropdown-item" href="/editora/">Editora</a></li>
+                            <li><a class="dropdown-item" href="/genero/">Gêneros</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/consulta/">Livros</a></li>
+                        </ul>
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reservas/">Reserva</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Administração</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="p-5 m-5">
+        <form action="/reservas/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="data">Data Empréstimo:</label>
+                <input type="date" class="form-control" id="data" name="data">
+            </div>
+            <div class="form-group">
+                <label for="data2">Data Devolução:</label>
+                <input type="date" class="form-control" id="data2" name="data2">
+            </div>
+            <div class="form-group">
+                <label for="leitor">Leitor:</label>
+                <select name="leitor" id="leitor" class="form-control">
+                    {% for Leitor in leitor %}
+                    <option value="{{Leitor.id}}">{{Leitor.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="livro">Livro:</label>
+                <select name="livro" id="livro" class="form-control">
+                    {% for Livro in livro %}
+                    <option value="{{Livro.id}}">{{Livro.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success mt-3 btn-block">Salvar</button>
+        </form>
+    </main>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
